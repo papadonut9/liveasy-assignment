@@ -4,7 +4,7 @@ import java.util.Date;
 
 
 public class Load {
-  private String loadId;
+  private long loadId;
   private String loadingPoint;
   private String unloadingPoint;
   private String productType;
@@ -17,7 +17,7 @@ public class Load {
 //  dd-mm-yyyy
   private String date;
 
-  public Load(String loadId,
+  public Load(long loadId,
               String loadingPoint,
               String unloadingPoint,
               String productType,
@@ -40,11 +40,11 @@ public class Load {
   }
 
 
-  public String getLoadId() {
+  public long getLoadId() {
     return loadId;
   }
 
-  public void setLoadId(String loadId) {
+  public void setLoadId(long loadId) {
     this.loadId = loadId;
   }
 

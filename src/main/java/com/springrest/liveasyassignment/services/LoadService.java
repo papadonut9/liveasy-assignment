@@ -10,9 +10,9 @@ public interface LoadService {
   List<Load> getAllLoads();
   List<Load> getLoadByShipperId(String shipperId);
 
-  Load getLoadById(String loadId);
+  Load getLoadById(long loadId);
 
-  void updateLoad(String loadId, Load updatedLoad);
+  void updateLoad(long loadId, Load updatedLoad);
 
-  void deleteLoad(String loadId);
+  void deleteLoad(long loadId);
 }

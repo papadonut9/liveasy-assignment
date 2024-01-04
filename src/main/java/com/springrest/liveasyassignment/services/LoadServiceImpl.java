@@ -1,81 +1,58 @@
 package com.springrest.liveasyassignment.services;
 
+import com.springrest.liveasyassignment.dao.LoadDao;
 import com.springrest.liveasyassignment.entities.Load;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class LoadServiceImpl implements LoadService {
 
-  List<Load> loadList;
+  @Autowired
+  private LoadDao loadDao;
 
   public LoadServiceImpl() {
-    loadList = new ArrayList<>();
-    loadList.add(new Load(generateLoadId(), "Mumbai", "Bengaluru", "chemicals", "canter", 1, 250, "", "s01", "31-12-2023"
-    ));
-    loadList.add(new Load(generateLoadId(), "Delhi", "Gurugram", "Food", "canter", 1, 1000, "", "s02", "14-11-2023"
-    ));
   }
 
-  public String generateLoadId() {
-    return "load" + loadList.size();
+  public long generateLoadId() {
+    return loadDao.count()+1;
   }
-  /*@Override
-  public List<Load> getLoadByShipperId(String shipperId) {
-    List<Load> res = new ArrayList<>();
-    for(Load load : loadList){
-      if(load.getShipperId().equals(shipperId))
-        res.add(load);
-    }
-  }*/
 
   @Override
   public List<Load> getAllLoads() {
-    return loadList;
+    return loadDao.findAll();
   }
 
   @Override
   public void saveLoad(Load load) {
-
     load.setLoadId(generateLoadId());
-    loadList.add(load);
+    loadDao.save(load);
   }
 
   @Override
   public List<Load> getLoadByShipperId(String shipperId) {
-    List<Load> res = new ArrayList<>();
-    for (Load load : loadList) {
-      if (load.getShipperId().equals(shipperId))
-        res.add(load);
-    }
-    return res;
+    Long longShipperId = Long.parseLong(shipperId);
+    return loadDao.findAllById(Collections.singletonList(longShipperId));
   }
 
   @Override
-  public Load getLoadById(String loadId) {
-    for(Load load: loadList){
-      if(load.getLoadId().equals(loadId))
-        return load;
-    }
-    return null;
+  public Load getLoadById(long loadId) {
+    return loadDao.findById(loadId).orElse(null);
   }
 
   @Override
-  public void updateLoad(String loadId, Load updatedLoad) {
-    for(int i = 0; i < loadList.size(); i++){
-      Load load = loadList.get(i);
-      if(load.getLoadId().equals(loadId)){
-        updatedLoad.setLoadId(loadId);
-        loadList.set(i, updatedLoad);
-        break;
-      }
-    }
+  public void updateLoad(long loadId, Load updatedLoad) {
+
   }
 
   @Override
-  public void deleteLoad(String loadId) {
-    loadList.removeIf(load -> load.getLoadId().equals(loadId));
+  public void deleteLoad(long loadId) {
+
+//    loadList.removeIf(load -> load.getLoadId().equals(loadId));
   }
 }

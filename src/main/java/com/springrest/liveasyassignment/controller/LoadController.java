@@ -36,17 +36,17 @@ public class LoadController {
   }
 
   @GetMapping("/{loadId}")
-  public Load getLoadById(@PathVariable String loadId){
+  public Load getLoadById(@PathVariable long loadId){
     return loadService.getLoadById(loadId);
   }
 
   @PutMapping("/{loadId}")
-  public void updateLoad(@PathVariable String loadId, @RequestBody Load updatedLoad) {
+  public void updateLoad(@PathVariable long loadId, @RequestBody Load updatedLoad) {
     loadService.updateLoad(loadId, updatedLoad);
   }
 
   @DeleteMapping("/{loadId}")
-  public void deleteLoad(@PathVariable String loadId) {
+  public void deleteLoad(@PathVariable long loadId) {
     loadService.deleteLoad(loadId);
   }
 }
