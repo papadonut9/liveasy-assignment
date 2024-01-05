@@ -1,9 +1,14 @@
 package com.springrest.liveasyassignment.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.Date;
 
-
+@Entity
 public class Load {
+
+  @Id
   private long loadId;
   private String loadingPoint;
   private String unloadingPoint;
@@ -37,6 +42,10 @@ public class Load {
     this.comment = comment;
     this.shipperId = shipperId;
     this.date = date;
+  }
+
+  public Load() {
+
   }
 
 
